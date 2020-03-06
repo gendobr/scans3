@@ -23,7 +23,7 @@ def scan_s3_bucket(
 ):
     # post jobs
     resource = libs3.resource(aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
-    files = libs3.grep(libs3.ls(bucket, resource=resource), r'\.doc|\.pdf')
+    files = libs3.grep(libs3.ls(bucket, resource=resource), r'\.doc|\.pdf|\.xlsm|\.xls')
 
     tmp_queue = 'avanan_' + str(random.random())
     out_rmq = rabbitmq.RMQBlockingConnection()
@@ -52,10 +52,12 @@ def scan_s3_bucket(
 
         message_method, message_header_frame, message_body = in_rmq.rmq_next_message(queue_name=tmp_queue,
                                                                                      auto_ack=True)
+        # print(('response', 'bucket', message_body ))
         if message_body is not None:
             message = json.loads(message_body)
             messages[message['key']] = message
             n_waiting = len([v for v in messages.values() if 'summary' not in v])
+            # print(('response', 'bucket', message['bucket'], 'file', message['key']))
         else:
             time.sleep(dt)
             _timeout += dt

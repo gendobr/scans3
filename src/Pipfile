@@ -7,7 +7,6 @@ verify_ssl = true
 
 [packages]
 flask = "*"
-requests = "*"
 oletools = "*"
 boto3 = "*"
 python-dotenv = "*"

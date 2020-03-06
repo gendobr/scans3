@@ -25,12 +25,14 @@ def scan(data):
             summary = True
         elif i.id == 'flash' and str(i.value) == '1':
             summary = True
-        report.append(dict(
+        item = dict(
             id=i.id,
             name=i.name,
             type=repr(i.type),
             value=repr(i.value)
-        ))
+        )
+        # print(item)
+        report.append(item)
     return {
         'summary': summary,
         'details': report

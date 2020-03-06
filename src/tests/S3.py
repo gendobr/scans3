@@ -31,7 +31,7 @@ class S3(unittest.TestCase):
         # print(response)
         self.assertTrue(resource is not None)
 
-    @unittest.skip("")
+    # @unittest.skip("")
     def test_write(self):
 
         s3 = libs3.client(
@@ -51,6 +51,11 @@ class S3(unittest.TestCase):
         s3.upload_fileobj(f, self.settings["BUCKET_NAME"], "3.png")
         f.close()
 
+        # 4.xlsm
+        f = open('./data/4.xlsm', 'rb')
+        s3.upload_fileobj(f, self.settings["BUCKET_NAME"], "4.xlsm")
+        f.close()
+
         # print(response)
         self.assertTrue(True)
 
@@ -65,15 +70,15 @@ class S3(unittest.TestCase):
         print(response)
         self.assertTrue(len(response) == 3)
 
-    @unittest.skip("")
+    # @unittest.skip("")
     def test_grep(self):
         resource = libs3.resource(
             aws_access_key_id=self.settings['AWS_ACCESS_KEY_ID'],
             aws_secret_access_key=self.settings['AWS_SECRET_ACCESS_KEY']
         )
-        response = libs3.grep(libs3.ls(self.settings["BUCKET_NAME"], resource), r'\.doc|\.pdf')
+        response = libs3.grep(libs3.ls(self.settings["BUCKET_NAME"], resource), r'\.doc|\.pdf|\.xlsm|\.xls')
         print(response)
-        self.assertTrue(len(response) == 2)
+        self.assertTrue(len(response) == 3)
 
 
     # @unittest.skip("")

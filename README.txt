@@ -2,8 +2,8 @@ INSTALLATION
 
 Requirements
 - python 3
-- RabbitMq directory
 - Amazon S3 access (id, key, and readable bucket)
+- RabbitMq running
 
 
 Local installation:
@@ -19,14 +19,26 @@ $ pipenv run python -m unittest tests.Scan
 $ pipenv run python -m unittest tests.S3
 
 
-RUN
+RUN IN DOCKER
+
+1) CD into src directory and build Docker image
+   docker image build -t avanan-bwt-scans3 .
+
+2) start worker
+   docker run -it avanan-bwt-scans3 worker.sh
+
+3) start flask endpoint
+   docker run -p 5000:5000 -it avanan-bwt-scans3 flask.sh
+
+
+RUN IN TERMINALS
 Start at least 2 terminal windows.
 
 Variant 1:
 In the 1st terminal run worker
   $ pipenv run python worker.py
 
-In the 2nd terminal run
+In the 2nd terminal call scan.py
   $ pipenv run python scan.py <your_bucket_to_scan>
 
 Variant 2:

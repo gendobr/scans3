@@ -149,6 +149,7 @@ class RMQBlockingConnection(RMQ):
         """
         Count message in the queue_name
         """
+        self.queue_declare(queue_name=queue_name)
         res = self.rmq_channel.queue_declare(
             queue=queue_name,
             durable=True,

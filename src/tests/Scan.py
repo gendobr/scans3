@@ -25,13 +25,20 @@ class Scan(unittest.TestCase):
         # print(response)
         self.assertFalse(response['summary'])
 
-    # @unittest.skip("")
+    @unittest.skip("")
     def test_doc_scan(self):
         response = scan.scan('./data/2.doc')
         # print(response)
         self.assertFalse(response['summary'])
 
-    # @unittest.skip("")
+    @unittest.skip("")
+    def test_pdf2_scan(self):
+        response = scan.scan('./data/7.pdf')
+        print(response)
+        self.assertFalse(response['summary'])
+
+
+    @unittest.skip("")
     def test_pdf_bytes_scan(self):
         fp=open('./data/1.pdf', 'rb')
         response=scan.scan(fp.read())
@@ -39,7 +46,7 @@ class Scan(unittest.TestCase):
         # print(response)
         self.assertFalse(response['summary'])
 
-    # @unittest.skip("")
+    @unittest.skip("")
     def test_dic_bytes_scan(self):
         fp=open('./data/2.doc', 'rb')
         response=scan.scan(fp.read())
