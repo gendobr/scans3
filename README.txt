@@ -39,3 +39,19 @@ In the 2nd terminal run
   and then open in browser the following URL
   http://localhost:5000/
 
+FILELIST
+
+./data/       - test data
+./tests/      - unit tests
+.env.example  - configuration example
+app.py        - Flask endpoint to place jobs in queue and read worker responses
+Dockerfile    - Docker build script
+libcore.py    - function to scan S3 bucket
+librmq.py     - class to communicate with RabbitMQ
+libs3.py      - functions to communicate with Amazon S#
+libscan.py    - functions to scan files
+Pipfile       - pipenv configuration
+Pipfile.lock  - pipenv configuration snapshot
+scan.py       - command-line scanner to place jobs in queue and read worker responses
+start.sh      - BASH script to start workers and Flask REST endpoint
+worker.py     - daemon worker to read jobs from queue, scan file and send report back
